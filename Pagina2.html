@@ -3,13 +3,14 @@
 <head>
 	<title>Pagina 2</title>
 	<script type="text/javascript">
-		function operarAritmeticamente(){
+		function operador(){
 			var operacion = document.getElementById("operaciones");
 			var texto = operacion.options[operacion.selectedIndex].text;
 			
 			var a = parseInt(document.getElementById("a").value);
 			var b = parseInt(document.getElementById("b").value);
 			var result = 0.0;
+			
 			
 			if (texto == "Suma") {
 				result=a+b;
@@ -23,8 +24,28 @@
 			}else if (texto == "Division"){
 				result=a/b;
 				document.getElementById("resultado").innerHTML=result;
+			}else if (texto == "AND") {
+				if(a == b)
+				document.getElementById("resultado").innerHTML="True";
+				else document.getElementById("resultado").innerHTML="False";
+
+			}else if (texto == "OR") {
+				if(a == b)
+				document.getElementById("resultado").innerHTML="False";
+				else document.getElementById("resultado").innerHTML="True";
+			}else if (texto == "NOT") {
+				if(a != b)
+				document.getElementById("resultado").innerHTML="True";
+				else document.getElementById("resultado").innerHTML="False";
+			}else if (texto == "Suma de Bits"){
+				result=a/b;
+				document.getElementById("resultado").innerHTML=result;
+			}else if (texto == "Resta de Bits"){
+				result=a/b;
+				document.getElementById("resultado").innerHTML=result;
 			}
 		}
+		
 	</script>
 </head>
 <body>
@@ -38,10 +59,16 @@
       <option  value="Resta">Resta</option>
       <option  value="Producto">Producto</option>
       <option  value="Division">Division</option>
+      <option  value="And">AND</option>
+      <option  value="Or">OR</option>
+      <option  value="Not">NOT</option>
+      <option  value="BitSuma">Suma de Bits</option>
+      <option  value="BitResta">Resta de Bits</option>
    </select> 
-	<button type="button" onclick="operarAritmeticamente()">Operar</button>
+	<button type="button" onclick="operador()">Operar</button>
 	<br>
-	<p id="resultado">dgsdgsdgsdgsdg</p>
+	<p>El resultado de la Operación es: </p>
+	<p id="resultado"></p>
 
 	</form>
 
