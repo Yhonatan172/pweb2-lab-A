@@ -2,13 +2,35 @@
 <html>
 <head>
 	<title>Pagina 2</title>
+	<script type="text/javascript">
+		function operarAritmeticamente(operacion){
+
+			var operaciones = ["Suma", "Resta", "Producto", "Division"];
+			var a = document.getElementaryById("a");
+			var b = document.getElementaryById("b");
+			var result=0.0;
+			if (operacion.equals(operaciones[0])) {
+				result=a+b;
+				document.getElementaryById("resultado").innerHTML=result;
+			}else if (operacion.equals(operaciones[1])) {
+				result=a-b;
+				document.getElementaryById("resultado").innerHTML=result;
+			}else if (operacion.equals(operaciones[2])){
+				result=a*b;
+				document.getElementaryById("resultado").innerHTML=result;
+			}else if (operacion.equals(operaciones[3])){
+				result=a/b;
+				document.getElementaryById("resultado").innerHTML=result;
+			}
+		}
+	</script>
 </head>
 <body>
 	<form>
 	<label>Ingrese el primer número</label>
-	<input type="number" name="a">
+	<input type="number" name="a" id="a">
 	<label>Ingrese el segundo número</label>
-	<input type="number" name="b"><br>
+	<input type="number" name="b" id="b"><br>
 	<input list="operaciones" name="operaciones">
 	<datalist id="operaciones">
 		<option value="Suma"></option>
@@ -16,7 +38,7 @@
 		<option value="Producto"></option>
 		<option value="División"></option>
 	</datalist> 
-	<button onclick="myfunction()">Operar</button>
+	<button onclick="operarAritmeticamente('value')">Operar</button>
 	<br>
 	<p id="resultado"></p>
 
