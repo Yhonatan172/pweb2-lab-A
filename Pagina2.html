@@ -4,23 +4,25 @@
 	<title>Pagina 2</title>
 	<script type="text/javascript">
 		function operarAritmeticamente(){
-			var operacion = document.getElementaryByValue('operaciones');
-			var operaciones = ["Suma", "Resta", "Producto", "Division"];
-			var a = document.getElementaryById("a");
-			var b = document.getElementaryById("b");
-			var result=0.0;
-			if (operacion==(operaciones[0])) {
+			var operacion = document.getElementById("operaciones");
+			var texto = operacion.options[operacion.selectedIndex].text;
+			
+			var a = parseInt(document.getElementById("a").value);
+			var b = parseInt(document.getElementById("b").value);
+			var result = 0.0;
+			
+			if (texto == "Suma") {
 				result=a+b;
-				document.getElementaryById("resultado").innerHTML=result;
-			}else if (operacion==(operaciones[1])) {
+				document.getElementById("resultado").innerHTML=result;
+			}else if (texto == "Resta") {
 				result=a-b;
-				document.getElementaryById("resultado").innerHTML=result;
-			}else if (operacion==(operaciones[2])){
+				document.getElementById("resultado").innerHTML=result;
+			}else if (texto == "Producto"){
 				result=a*b;
-				document.getElementaryById("resultado").innerHTML=result;
-			}else if (operacion==(operaciones[3])){
+				document.getElementById("resultado").innerHTML=result;
+			}else if (texto == "Division"){
 				result=a/b;
-				document.getElementaryById("resultado").innerHTML=result;
+				document.getElementById("resultado").innerHTML=result;
 			}
 		}
 	</script>
@@ -31,16 +33,15 @@
 	<input type="number" name="a" id="a">
 	<label>Ingrese el segundo número</label>
 	<input type="number" name="b" id="b"><br>
-	<input list="operaciones" name="operaciones">
-	<datalist id="operaciones">
-		<option  value="Suma"></option>
-		<option  value="Resta"></option>
-		<option  value="Producto"></option>
-		<option  value="División"></option>
-	</datalist> 
-	<button onclick="operarAritmeticamente(document.getElementaryById('operaciones'))">Operar</button>
+	<select id="operaciones">
+      <option  value="Suma">Suma</option>
+      <option  value="Resta">Resta</option>
+      <option  value="Producto">Producto</option>
+      <option  value="Division">Division</option>
+   </select> 
+	<button type="button" onclick="operarAritmeticamente()">Operar</button>
 	<br>
-	<p id="resultado"></p>
+	<p id="resultado">dgsdgsdgsdgsdg</p>
 
 	</form>
 
