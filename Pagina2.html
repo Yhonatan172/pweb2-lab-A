@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Pagina 2</title>
 </head>
 <body>
+	<form>
+	<label>Ingrese el primer número</label>
+	<input type="number" name="a">
+	<label>Ingrese el segundo número</label>
+	<input type="number" name="b"><br>
+	<input list="operaciones" name="operaciones">
+	<datalist id="operaciones">
+		<option value="Suma"></option>
+		<option value="Resta"></option>
+		<option value="Producto"></option>
+		<option value="División"></option>
+	</datalist> 
+	<button onclick="myfunction()">Operar</button>
+	<br>
+	<p id="resultado"></p>
+
+	</form>
 
 </body>
 </html>
