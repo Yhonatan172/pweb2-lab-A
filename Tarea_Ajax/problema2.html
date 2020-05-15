@@ -6,81 +6,87 @@
 	<script type="text/javascript" src="Chart.bundle.min.js"></script>
 	<script type="text/javascript" src="Chart.js"></script>
 	<script type="text/javascript">
-	function loadDoc(){
-		var xhttp = new XMLHttpRequest();
-  			xhttp.onreadystatechange = function() {
-    			if (this.readyState == 4 && this.status == 200) {
-      				var data=this.responseText;
-      				var datos=JSON.parse(data);
-      				var fecha= document.getElementById("intFecha").value;
-      				
-      				dibujar(capturarRegiones(datos),capturarNumeros(datos, fecha));
-    			}
-  			};
-  		
-  		xhttp.open("GET", "data.JSON", true);
-  		xhttp.send();
+		function loadDoc(){
+			var xhttp = new XMLHttpRequest();
+	  		xhttp.onreadystatechange = function() {
+	    		if (this.readyState == 4 && this.status == 200) {
+	      			var data=this.responseText;
+	     			var datos=JSON.parse(data);
+	      			var fecha= document.getElementById("intFecha").value;
+	      			dibujar(capturarRegiones(datos),capturarNumeros(datos, fecha));
+	    		}
+	  		};
+	  		
+	  		xhttp.open("GET", "data.JSON", true);
+	  		xhttp.send();
 
-	}
-	function capturarRegiones(data){
-		var regiones=[];
-		for (var i = 0; i < data.length; i++) {
-			if (data[i].region!= "Lima" && data[i].region!="Callao") {
-				regiones.push(data[i].region);
-			}
 		}
-		return regiones;
-	}
-	function capturarNumeros(data, fecha){
-		var numeros=[];
-		for (i in data) {
-			for (j in data[i].confirmed) {
-				var ffecha=""+data[i].confirmed[j].date;
-				if(ffecha == fecha && data[i].region != "Lima" && data[i].region!= "Callao"){
-					var num=Number(data[i].confirmed[j].value);
-					numeros.push(num);
+		function capturarRegiones(data){
+			var regiones=[];
+			for (i in data) {
+				if (data[i].region!= "Lima" && data[i].region!="Callao") {
+					regiones.push(data[i].region);
 				}
 			}
+			return regiones;
 		}
-		return numeros;
-	}
-	function dibujar(regiones, numeros){
-
-		var canvas = document.getElementById('chart').getContext('2d');
-		window.bar = new Chart(canvas, {
-			type : "bar",
-			data : {
-				labels : regiones,
-				datasets :[{
-					data: numeros, label: "Numero de infectados."}]
-			},
-			options : {
-				elements : {
-					rectangle : {
-						borderWidth : 1,
-						borderColor : "rgb(0,255,0)",
-						borderSkipped : 'bottom'
+		function capturarNumeros(data, fecha){
+			var numeros=[];
+			for (i in data) {
+				for (j in data[i].confirmed) {
+					var ffecha=""+data[i].confirmed[j].date;
+					if(ffecha == fecha && data[i].region != "Lima" && data[i].region!= "Callao"){
+						var num=Number(data[i].confirmed[j].value);
+						numeros.push(num);
 					}
-				},
-				responsive : true,
-				title : {
-					display : true,
-					text : "Prueba de grafico de barras"
 				}
 			}
-		});
+			return numeros;
+		}
+		function dibujar(regiones, numeros){
 
-		
-	}
+			var canvas = document.getElementById('chart').getContext('2d');
+			window.bar = new Chart(canvas, {
+				type : "bar",
+				data : {
+					labels : regiones,
+					datasets :[{ 
+							data: numeros, label: "Numero de infectados."
+							}]
+				},
+				options : {
+					elements : {
+						rectangle : {
+							borderWidth : 1,
+							borderColor : "rgb(0,255,0)",
+							borderSkipped : 'bottom'
+						}
+					},
+					responsive : true,
+					title : {
+						display : true,
+						text : "Prueba de grafico de barras"
+					}
+				}
+			});
+		}
 	</script>
+	<style type="text/css">
+		#demo{
+			border-style:hidden;
+			width: 50%;
+			height: 50%; 
+		}
+	</style>
 </head>
 <body>
 
-<h2>Rigistro de contagiados por Región</h2>
-<p>Ingrese la fecha, en el siguiente formato "dia-mes-año"</p>
-<input type="text" id="intFecha">
-<button type="button" onclick="loadDoc()">Consultar</button>
-<canvas id="chart" width="500" height="350"></canvas>
-
+	<h2>Rigistro de contagiados por Región</h2>
+	<p>Ingrese la fecha, en el siguiente formato "dia-mes-año"</p>
+	<input type="text" id="intFecha"> <br>
+	<button type="button" onclick="loadDoc()">Consultar</button><br>
+	<div id="demo">
+		<canvas id="chart" width="500" height="350"></canvas>
+	</div>
 </body>
 </html>
