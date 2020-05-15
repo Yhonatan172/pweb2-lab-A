@@ -1,9 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<script type="text/javascript" src="jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="Chart.bundle.min.js"></script>
+	<script type="text/javascript">
+	function loadDoc(){
+		var xhttp = new XMLHttpRequest();
+  			xhttp.onreadystatechange = function() {
+    			if (this.readyState == 4 && this.status == 200) {
+      				var data=this.responseText;
+      				var datos=JSON.parse(data);
+      				var fecha= document.getElementById("intFecha").value;
+      				
+      				
+      				dibujar(capturarRegiones(datos),capturarNumeros(datos, fecha));
+    			}
+  			};
+  		
+  		xhttp.open("GET", "data.JSON", true);
+  		xhttp.send();
+
+
+	};
+	function capturarRegiones(data){
+		var regiones=[];
+		for (var i = 0; i < data.length; i++) {
+			if (data[i].region!= "Lima" && data[i].region!="Callao") {
+				regiones.push(data[i].region);
+			}
+		}
+		return regiones;
+	}
+	function capturarNumeros(data, fecha){
+		var numeros=[];
+		for (var i = 0; i < data.length; i++) {
+			for (var j = 0; j < data[i].confirmed.length; j++) {
+				if(data[i].confirmed[j].date== fecha)
+					numeros.push(data[i].confirmed[j].value);
+			}
+		}
+	}
+	function dibujar(regiones, numeros){
+
+		var datos = {
+			labels : regiones,
+			datasets : numeros,
+			/* [
+			for (i in numeros) {
+				if(i=numeros.length-1){
+					{
+					label: regiones[i],
+					backgroundColor : "rgba(220,220,220,0.5)",
+					data : numeros[i]}
+				}
+				else{
+
+				}
+
+					,
+				}
+			]*/
+		};
+
+		var canvas = document.getElementById('chart').getContext('2d');
+		window.bar = new Chart(canvas, {
+			type : "bar",
+			data : datos,
+			options : {
+				elements : {
+					rectangle : {
+						borderWidth : 1,
+						borderColor : "rgb(0,255,0)",
+						borderSkipped : 'bottom'
+					}
+				},
+				responsive : true,
+				title : {
+					display : true,
+					text : "Prueba de grafico de barras"
+				}
+			}
+		});
+
+		/*setInterval(function(){
+			var newData = [
+				[getRandom(),getRandom(),getRandom(),getRandom()*-1,getRandom()],
+				[getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],
+				[getRandom(),getRandom(),getRandom(),getRandom(),getRandom()],				
+			];
+
+			$.each(datos.datasets, function(i, dataset){
+				dataset.data = newData[i];
+			});
+			window.bar.update();
+		}, 5000);*/
+
+		
+
+
+		/*function getRandom(){
+			return Math.round(Math.random() * 100);
+		}*/
+	}
+	</script>
 </head>
 <body>
+
+<h2>Rigistro de contagiados por Región</h2>
+<p>Ingrese la fecha, en el siguiente formato "dia-mes-año"</p>
+<input type="text" id="intFecha">
+<button type="button" onclick="loadDoc()">Consultar</button>
+<canvas id="chart" width="500" height="350"></canvas>
+<canvas ></canvas>
+
+
+
 
 </body>
 </html>
