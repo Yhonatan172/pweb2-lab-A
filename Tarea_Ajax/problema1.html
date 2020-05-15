@@ -1,72 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<script type="text/javascript" src="jquery-1.12.0.min.js"></script>
-	<script type="text/javascript" src=""></script>
-	<script type="Chart.js"></script>
+	<script type="text/javascript" src="Chart.bundle.min.js"></script>
+	<script type="text/javascript" src="Chart.js"></script>
 	<script type="text/javascript">
 		function loadDoc() {
  			var xhttp = new XMLHttpRequest();
   			xhttp.onreadystatechange = function() {
     			if (this.readyState == 4 && this.status == 200) {
-      				document.getElementById("demo").innerHTML= "Funciono";
       				var data=this.responseText;
       				var datos=JSON.parse(data);
-      				
       				dibujar(datos);
-
     			}
-  		};
-  		function dibujar(data){
-  			var region1= document.getElementById("ciudad1").value;
-  			var region2= document.getElementById("ciudad2").value;
-  			var pos1;
-  			var pos2;
-  			for (var i = 0; i < data.length; i++) {
-  				if(region1 == data[i].region)
-  					pos1=i;
-  				if(region2 == data[i].region)
-  					pos2=i;
-  			}
-  			
-			var datss = {
-			labels : [data[pos1].region, data[pos2].region],
-			datasets : [{
-				label : data[pos1].region,
-				backgroundColor : "rgba(220,220,220,0.5)",
-				data : data[pos1].confirmed[data[pos1].confirmed.length-1].getValue
-			},
-			{
-
-				label : data[pos2].region,
-				backgroundColor : "rgba(151,187,205,0.5)",
-				data : data[pos2].confirmed[data[pos2].confirmed.length-1].getValue,
-			}
-			]
-		};
-
-		var canvas = document.getElementById("myCanvas").getContext("2d");
-		window.bar = new Chart(canvas, {
-			type : "bar",
-			data : datss,
-			options : {
-				elements : {
-					rectangle : {
-						borderWidth : 1,
-						borderColor : "rgb(0,255,0)",
-						borderSkipped : 'bottom'
-					}
-				},
-				responsive : true,
-				title : {
-					display : true,
-					text : "Número de contagiados"
-				}
-			}
-		});
-  		}
+  			};
+  		
   		xhttp.open("GET", "data.JSON", true);
   		xhttp.send();
+		}
+		
+	  	function dibujar(data){
+	  			var region1= document.getElementById("ciudad1").value;
+	  			var region2= document.getElementById("ciudad2").value;
+	  			var pos1;
+	  			var pos2;
+	  			for (var i = 0; i < data.length; i++) {
+	  				if(region1 == data[i].region)
+	  					pos1=i;
+	  				if(region2 == data[i].region)
+	  					pos2=i;
+	  			}
+	  			var num1=Number(data[pos1].confirmed[data[pos1].confirmed.length-1].value);
+	  			var num2=Number(data[pos2].confirmed[data[pos2].confirmed.length-1].value);
+
+			var canvas = document.getElementById('chart').getContext('2d');
+			window.bar = new Chart(canvas, {
+				type : "bar",
+				data : {
+					labels : [region1, region2],
+					datasets :[{
+						data: [num1, num2], label: "Numero de infectados."}]
+				},
+				options : {
+					elements : {
+						rectangle : {
+							borderWidth : 1,
+							borderColor : "rgb(0,255,0)",
+							borderSkipped : 'bottom'
+						}
+					},
+					responsive : true,
+					title : {
+						display : true,
+						text : "Prueba de grafico de barras"
+					}
+				}
+			});
+
+		
 	}
 	</script>
 	
