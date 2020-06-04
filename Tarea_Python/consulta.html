@@ -1,27 +1,29 @@
-Para permitir que el usuario pueda hacer la consulta se usará el siguiente formulario
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="estilo.css">
-<script src=”consulta.js”></script>
-<title>Consultas a la bibliografía</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<script src=”consulta.js”></script>
+	<title>Consultas a la bibliografía</title>
 </head>
 <body>
- <form name=”myform”>
- <fieldset>
- <legend>Búsqueda biblográfica por:</legend>
- <select name="kind">
- <option value="author"> autor <br>
- <option value="title"> título <br>
- <option value="year"> año <br>
- </select>
- <input type="text" name="keyword"><br>
- <button onclick="query(document.myform.kind.value, document.myform.keyword.value)”>
- Consultar
- </button>
- </fieldset>
- </form>
+	 <form name=”myform”>
+		 <fieldset>
+			 <legend>Búsqueda biblográfica por:</legend>
+			 <select name="kind">
+				 <option value="author"> autor <br>
+				 <option value="title"> título <br>
+				 <option value="year"> año <br>
+			 </select>
+			 <input type="text" name="keyword"><br>
+			 <button onclick="loadDoc(document.myform.kind.value, 
+			 						document.myform.keyword.value)">
+			 Consultar
+			 </button>
+		 </fieldset>
+	 </form>
+	 <p id="answer">Respuesta</p>
  <div>
 </body>
 </html>
