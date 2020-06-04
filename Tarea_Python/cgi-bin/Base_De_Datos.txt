@@ -1,0 +1,10 @@
+[1] J. Glenn Brookshear, Computer Science: An Overview 11th Edition;
+Prentice Hall; January 31, 2011.
+[2] Jacqueline D. Hamilton, CGI Programming 101: Programming Perl for the
+World Wide Web Second Edition; http://www.cgi101.com/; 2004.
+[3] Nick Parlante, Essential perl; http://cslibrary.stanford.edu/108/;
+2002.
+[4] Web-building tutorials; http://www.w3schools.com/; 2013.
+[5] S. Haber & W.S. Stornetta, Secure names for bit-strings; In
+Proceedings of the 4th ACM Conference on Computer and Communications
+Security; pages 28-35, April; 2004.
