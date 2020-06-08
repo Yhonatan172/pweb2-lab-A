@@ -3,24 +3,23 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="estilo.css">
-	<script src=”consulta.js”></script>
+	
+	<script src="consulta.js"></script>
 	<title>Consultas a la bibliografía</title>
 </head>
 <body>
-	 <form name=”myform”>
+	 <form name="myform">
 		 <fieldset>
 			 <legend>Búsqueda biblográfica por:</legend>
 			 <select name="kind">
-				 <option value="author"> autor <br>
-				 <option value="title"> título <br>
-				 <option value="year"> año <br>
+				 <option value="actor"> Actor<br>
+				 <option value="nombre"> Nombre Pelicula <br>
+				 <option value="año"> Año <br>
 			 </select>
-			 <input type="text" name="keyword"><br>
-			 <button onclick="loadDoc(document.myform.kind.value, 
-			 						document.myform.keyword.value)">
-			 Consultar
-			 </button>
+			 <!-- <input type="text" name="keyword"><br> ,document.getElementsByName('keyword')[0].value)"" -->
+			 <button onclick="query(document.getElementsByName('kind')[0].value">
+   				Consultar
+ 			 </button>
 		 </fieldset>
 	 </form>
 	 <p id="answer">Respuesta</p>
