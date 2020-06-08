@@ -2,11 +2,21 @@
 import sqlite3
 import json
 import cgi
-@app.route('/getmethod/<jsdata>')
-def get_javascript_data(jsdata):
-       return jsdata
-$.get( "/getmethod/<javascript_data>" );
+import cgitb
+form = cgi.FieldStorage()
+
+table = form.getvalue('valor')
+
 conn = sqlite3.connect('imdb.db')
 c = conn.cursor()
-tabla=
-c.execute('SELECT * FROM actor')	
+data=[]
+for datos in c.execute('SELECT * FROM actor'):
+	data.append(datos)
+
+print("Content-type: application/json\n\n")
+#print("Content-type: text/html\n\n")
+#print("<h1>Hola</h1>")
+print(json.dumps(data)) 
+#print("Content-type: application/json")
+#response={'Price':54,'Cost':'99'}
+#print(json.JSONEncoder().encode(response))
